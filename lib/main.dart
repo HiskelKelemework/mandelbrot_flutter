@@ -169,10 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
         final coordinate = Offset(as, bs);
 
-        while (counter < 20) {
+        while (counter < 50) {
           nextInput = computeNextInput(nextInput, coordinate);
 
-          if ((nextInput.dx + nextInput.dy).abs() > 5) {
+          if (pow(nextInput.dx, 2) + pow(nextInput.dy, 2) > 4) {
             break;
           }
 
@@ -181,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
         // didn't blow up to infinity.
 
-        if (counter == 20) {
+        if (counter == 50) {
           shadedPoints.add(Point(offset: Offset(ac, bc)));
         }
       }
@@ -205,6 +205,7 @@ class OpenPainter extends CustomPainter {
     var paint1 = Paint()
       ..color = Colors.black
       ..strokeCap = StrokeCap.square //rounded points
+      ..isAntiAlias = true
       ..strokeWidth = 3;
 
     final offsets = points.map((e) => e.offset).toList();
